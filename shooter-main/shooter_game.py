@@ -13,7 +13,7 @@ clock = time.Clock()
 FPS = 60
 
 mixer.init()
-mixer.music.load("space.ogg")
+mixer.music.load("win.mp3")
 mixer.music.play()
 fire_sound = mixer.Sound("fire.ogg")
 win_sound = mixer.Sound("win.mp3")
@@ -87,7 +87,7 @@ for i in range(2):
 bossHp = 10
 bullets = sprite.Group()
 boss = False
-bossPL = Player("Без названия (1).jpg",280,70,110,140,10)
+bossPL = Player("Без названия (1).jpg",280,70,110,140,5)
 rocket = Player("rocket.png",300,400,80,100,10)        
 game = True
 finish = False
@@ -185,7 +185,14 @@ while game:
         wn.blit(boss_tx,(100,20))
         text_bul = font1.render("Пулі: " + str(cur_bul), 1,(255,255,255))
         wn.blit(text_bul,(10,50))
-    
+
+        if bossHp <= 0:
+            wn.blit(background,(0,0))
+            boss = False
+            finish = True
+            win = font2.render("YOU WIN", 1,(1,255,2))
+            wn.blit(win,(200,200))
+            mixer.music.stop()
     
     
     
@@ -196,6 +203,8 @@ while game:
         score = 0 
         fire_bul = False
         cur_bul = 0
+        bossHp = 10
+        boss = False
         for m in monsters:
             m.kill()
         for b in bullets:
@@ -212,12 +221,7 @@ while game:
             asteroid = Enemy("asteroid.png",randint(80,620),-50,80,50,randint(1,4))
             asteroids.add(asteroid)
         mixer.music.play()
-    if bossHp <= 0:
-        boss = True
-        finish = True
-        win = font2.render("YOU WIN", 1,(1,255,2))
-        wn.blit(win,(200,200))
-        mixer.music.stop()
+
     if lose >= lose_score:
         finish = True
         win = font2.render("YOU LOSE", 1,(255,2,2))
