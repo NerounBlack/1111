@@ -8,7 +8,7 @@ from time import time as timer
 
 wn = display.set_mode((700,500))
 display.set_caption("Шутер")
-background = transform.scale(image.load("galaxy.jpg"),(700,500))
+background = transform.scale(image.load("завантаження.jpg"),(700,500))
 clock = time.Clock()
 FPS = 60
 
